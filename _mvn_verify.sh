@@ -5,7 +5,7 @@
 # The ITs talk to a real MySQL at localhost:3306/sakila (the `sakila-it` unit), which upstream owns; bring it up
 # with
 #
-#     cd ../mysql-sakila-persistence && ./_docker-compose-up.sh
+#     cd ../mysql-sakila-persistence && ./_docker_compose_up.sh
 #
 # first; otherwise they fail on the connection rather than on a query.
 #

@@ -19,7 +19,7 @@ so unlike upstream this build has no provider profiles.
 Upstream owns the compose file and the init scripts:
 
 ```shell
-$ cd ../mysql-sakila-persistence && ./_docker-compose-up.sh
+$ cd ../mysql-sakila-persistence && ./_docker_compose_up.sh
 ```
 
 brings up `mysql:9.7` on `localhost:3306` as `root` / `password`, loaded with the Sakila schema and data; Ctrl-C takes

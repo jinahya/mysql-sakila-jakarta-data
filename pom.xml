@@ -548,7 +548,7 @@
   <profiles>
     <!--
       Binds maven-failsafe-plugin, which runs the *IT classes against the Sakila database upstream's
-      _docker-compose-up.sh brings up. A profile, as upstream, so that a plain `mvnw verify` needs no database.
+      _docker_compose_up.sh brings up. A profile, as upstream, so that a plain `mvnw verify` needs no database.
       -->
     <profile>
       <id>failsafe</id>

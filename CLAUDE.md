@@ -48,7 +48,7 @@ the same artifact classified `test-companion` (`*_Randomizer` / `*_Persister` cl
   `7.4.12.Final`, H2, mysql-connector-j, ...) deliberately mirror upstream's, so what compiles here against the
   test-companion jar is what that jar was compiled against, and the generated code runs on the ORM that generated
   upstream's metamodel. Change them in step with upstream, not independently.
-- Upstream's `../../EXERCISES_COORDINATES.asciidoc` / `EXERCISES.yaml` is the catalogue of query exercises the sibling projects answer
+- Upstream's `../mysql-sakila-persistence/EXERCISES.asciidoc` / `EXERCISES.yaml` is the catalogue of query exercises the sibling projects answer
   one method per exercise, exercise id named in the method's javadoc.
 
 ## Build

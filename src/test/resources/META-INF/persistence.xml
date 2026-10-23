@@ -94,7 +94,7 @@
     <validation-mode>CALLBACK</validation-mode>
     <properties>
       <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-      <!-- the database of upstream's docker-compose.yml; see its _docker-compose-up.sh -->
+      <!-- the database of upstream's compose.yaml; see its _docker_compose_up.sh -->
       <property name="jakarta.persistence.jdbc.url"
                 value="jdbc:mysql://localhost:3306/sakila?characterEncoding=UTF-8"/>
       <property name="jakarta.persistence.jdbc.user" value="root"/>
