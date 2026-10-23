@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Test-only. The two units mirror upstream's (../mysql-sakila-persistence/src/test/resources/META-INF/persistence.xml);
+  keep them in step. Hibernate only; see the pom for why there is no EclipseLink here.
+
+  A repository picks its unit with @Repository(dataStore = "sakila-test"); one with no dataStore takes the default
+  persistence unit, which with two units declared is none, so every repository here names one.
+  -->
+<!-- https://jakarta.ee/xml/ns/persistence/ -->
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd"
+             version="3.2">
+  <persistence-unit name="sakila-test" transaction-type="RESOURCE_LOCAL">
+    <description>Persistence Unit for an In-Memory DB</description>
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <shared-cache-mode>NONE</shared-cache-mode>
+    <validation-mode>CALLBACK</validation-mode>
+    <properties>
+      <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
+      <!-- https://www.h2database.com/html/features.html#compatibility -->
+      <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:;MODE=MySQL;DATABASE_TO_LOWER=TRUE"/>
+      <property name="jakarta.persistence.jdbc.user" value="sa"/>
+      <property name="jakarta.persistence.jdbc.password" value="password"/>
+      <property name="hibernate.format_sql" value="true"/>
+      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+      <property name="hibernate.highlight_sql" value="true"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.use_sql_comment" value="true"/>
+    </properties>
+  </persistence-unit>
+  <persistence-unit name="sakila-it" transaction-type="RESOURCE_LOCAL">
+    <description>Persistence Unit for a Physical Database</description>
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <shared-cache-mode>NONE</shared-cache-mode>
+    <validation-mode>CALLBACK</validation-mode>
+    <properties>
+      <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+      <!-- the database of upstream's docker-compose.yml; see its _docker-compose-up.sh -->
+      <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sakila?characterEncoding=UTF-8"/>
+      <property name="jakarta.persistence.jdbc.user" value="root"/>
+      <property name="jakarta.persistence.jdbc.password" value="password"/>
+      <!-- The sample data is the fixture the tests read; nothing here may touch the schema. -->
+      <property name="hibernate.hbm2ddl.auto" value="none"/>
+      <property name="hibernate.format_sql" value="true"/>
+      <property name="hibernate.highlight_sql" value="true"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.use_sql_comment" value="true"/>
+    </properties>
+  </persistence-unit>
+</persistence>
