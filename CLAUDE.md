@@ -80,24 +80,35 @@ the sample data is the fixture the ITs read, and nothing may touch the schema or
 
 ## Tests
 
-No container. `__Repository_TestBase<R extends _Repository<?, ?>>` creates an `EntityManagerFactory` per test class
-(`Persistence.createEntityManagerFactory`), opens a `StatelessSession` per test, and instantiates the generated
-`<R>_` over it (`repository()`). A write needs the session's own transaction (`session().inTransaction(...)`).
-Extend `_Repository_Test<R>` for a unit test (unit `sakila-test`, empty H2, insert what you query) or
-`_Repository_IT<R>` for an integration test (unit `sakila-it`, read the sample data, roll back any write).
-Every repository has one empty concrete class per base (`<R>_Test`, `<R>_IT`, `<R>_WeldTest`, `<R>_WeldIT`), no
-test methods yet.
+A Weld SE container per test method (`@EnableAutoWeld` on `__Repository_TestBase<R, T, K>`). The container creates the
+generated `<R>_` through its `@Inject` constructor; the concrete test adds the class and names its types:
 
-The same pair runs in a CDI container: `_Repository_WeldTest<R>` / `_Repository_WeldIT<R>` over
-`__Repository_WeldTestBase<R>` (`@EnableWeld`, one Weld SE container per class). The container holds the generated
-`<R>_` and a nested `EntityManagerFactoryProducer` per unit, and creates `<R>_` through its `@Inject` constructor, one
-`@Dependent` instance (and session) per test. Two things are load-bearing:
+```java
+@AddBeanClasses(ActorRepository_.class)
+class ActorRepository_Test
+        extends _Repository_Test<ActorRepository, Actor, Integer> {
 
-- `<R>_` takes the factory from a `@PersistenceUnit` field, which a producer never reaches; `@WeldSetup`'s
-  `setPersistenceUnitFactory` bridges it to the produced bean. `@EnableAutoWeld` + `@AddBeanClasses` has no such hook,
-  and the field stays `null` (NPE in the generated `@PostConstruct`).
+    ActorRepository_Test() {
+        super(ActorRepository.class, Actor.class, Integer.class);
+    }
+}
+```
+
+`getRepositoryInstance()` returns the repository, one `@Dependent` instance (and `StatelessSession`) per test.
+`_Repository_Test` (unit `sakila-test`, empty H2 per test, insert what you query) and `_Repository_IT` (unit
+`sakila-it`, read the sample data, roll back any write) each add, with an inherited `@AddBeanClasses`, a nested
+`EntityManagerFactoryProducer` for their unit. A write needs the repository's own session and its transaction
+(`session(getRepositoryInstance()).inTransaction(...)`). Every repository has an empty `<R>_Test` and `<R>_IT`, no
+test methods yet. Three things are load-bearing:
+
+- `<R>_` takes the factory from a `@PersistenceUnit` field, resource injection that no producer reaches and Weld SE
+  does not fill. `__WeldJpaInjectionServices`, a test-only Weld `JpaInjectionServices` registered in
+  `src/test/resources/META-INF/services/org.jboss.weld.bootstrap.api.Service`, hands it the produced factory. Without
+  it the field stays `null` (NPE in the generated `@PostConstruct`).
 - The producer is `@Singleton`, not `@ApplicationScoped`: `<R>_`'s `unwrap(SessionFactory.class)` on a client proxy
-  throws `ClassCastException`. Producer methods are not inherited, so each unit's producer declares its own.
+  throws `ClassCastException`.
+- The base does not `@Inject R`: an injection point typed by a type variable is a CDI definition error
+  (WELD-001407), even when the subclass binds it. It injects `Instance<Object>` and selects `repositoryClass`.
 
 - `META-INF/persistence.xml`: units `sakila-test` (H2 `MODE=MySQL`, `create-drop`) and `sakila-it` (MySQL, `none`),
   mirroring upstream's; keep the two files in step. Both list every upstream class explicitly, since
