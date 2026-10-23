@@ -3,8 +3,11 @@
   Test-only. The two units mirror upstream's (../mysql-sakila-persistence/src/test/resources/META-INF/persistence.xml);
   keep them in step. Hibernate only; see the pom for why there is no EclipseLink here.
 
-  A repository picks its unit with @Repository(dataStore = "sakila-test"); one with no dataStore takes the default
-  persistence unit, which with two units declared is none, so every repository here names one.
+  No repository names a unit (@Repository(dataStore = ...)): a test opens a StatelessSession from the unit it runs on
+  and passes it to the generated <Name>_ constructor; see __Repository_TestBase.
+
+  Both units list the upstream classes, as upstream's do; with exclude-unlisted-classes, an entity not listed is not
+  managed.
   -->
 <!-- https://jakarta.ee/xml/ns/persistence/ -->
 <persistence xmlns="https://jakarta.ee/xml/ns/persistence"
@@ -14,13 +17,40 @@
   <persistence-unit name="sakila-test" transaction-type="RESOURCE_LOCAL">
     <description>Persistence Unit for an In-Memory DB</description>
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <class>com.github.jinahya.mysql.sakila.persistence.Actor</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.ActorInfo</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Address</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.BetterStaff</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.BetterStore</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.BetterEmployment</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.BetterEmploymentId</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Category</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.City</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Country</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Customer</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.CustomerList</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Film</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Film$RatingConverter</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.FilmActor</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.FilmActorId</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.FilmCategory</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.FilmText</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Inventory</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Language</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Payment</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Rental</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.SalesByFilmCategory</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Staff</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.StaffList</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Store</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <shared-cache-mode>NONE</shared-cache-mode>
     <validation-mode>CALLBACK</validation-mode>
     <properties>
       <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
       <!-- https://www.h2database.com/html/features.html#compatibility -->
-      <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:;MODE=MySQL;DATABASE_TO_LOWER=TRUE"/>
+      <property name="jakarta.persistence.jdbc.url"
+                value="jdbc:h2:mem:;MODE=MySQL;DATABASE_TO_LOWER=TRUE"/>
       <property name="jakarta.persistence.jdbc.user" value="sa"/>
       <property name="jakarta.persistence.jdbc.password" value="password"/>
       <property name="hibernate.format_sql" value="true"/>
@@ -33,13 +63,40 @@
   <persistence-unit name="sakila-it" transaction-type="RESOURCE_LOCAL">
     <description>Persistence Unit for a Physical Database</description>
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <class>com.github.jinahya.mysql.sakila.persistence.Actor</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.ActorInfo</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Address</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.BetterStaff</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.BetterStore</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.BetterEmployment</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.BetterEmploymentId</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Category</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.City</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Country</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Customer</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.CustomerList</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Film</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Film$RatingConverter</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.FilmActor</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.FilmActorId</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.FilmCategory</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.FilmText</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Inventory</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Language</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Payment</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Rental</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.SalesByFilmCategory</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Staff</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.StaffList</class>
+    <class>com.github.jinahya.mysql.sakila.persistence.Store</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <shared-cache-mode>NONE</shared-cache-mode>
     <validation-mode>CALLBACK</validation-mode>
     <properties>
       <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <!-- the database of upstream's docker-compose.yml; see its _docker-compose-up.sh -->
-      <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sakila?characterEncoding=UTF-8"/>
+      <property name="jakarta.persistence.jdbc.url"
+                value="jdbc:mysql://localhost:3306/sakila?characterEncoding=UTF-8"/>
       <property name="jakarta.persistence.jdbc.user" value="root"/>
       <property name="jakarta.persistence.jdbc.password" value="password"/>
       <!-- The sample data is the fixture the tests read; nothing here may touch the schema. -->
