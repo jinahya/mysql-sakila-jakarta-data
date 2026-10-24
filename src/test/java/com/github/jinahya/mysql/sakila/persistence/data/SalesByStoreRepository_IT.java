@@ -24,7 +24,7 @@ class SalesByStoreRepository_IT
         super(SalesByStoreRepository.class);
     }
 
-    @DisplayName("SAKILA-SALES_BY_STORE-B-01: selectAll()")
+    @DisplayName("SAKILA_SALES_BY_STORE_B_01: selectAll()")
     @Nested
     class SelectAllTest {
 
@@ -41,7 +41,7 @@ class SalesByStoreRepository_IT
         }
     }
 
-    @DisplayName("SAKILA-SALES_BY_STORE-B-02: selectDifference()")
+    @DisplayName("SAKILA_SALES_BY_STORE_B_02: selectDifference()")
     @Nested
     class SelectDifferenceTest {
 
@@ -52,7 +52,7 @@ class SalesByStoreRepository_IT
         }
     }
 
-    @DisplayName("SAKILA-SALES_BY_STORE-I-01: selectSumsByStoreAndWithARental()")
+    @DisplayName("SAKILA_SALES_BY_STORE_I_01: selectSumsByStoreAndWithARental()")
     @Nested
     class SelectSumsByStoreAndWithARentalTest {
 
@@ -64,7 +64,7 @@ class SalesByStoreRepository_IT
         }
     }
 
-    @DisplayName("SAKILA-SALES_BY_STORE-I-02: selectAllWithTakenByManager()")
+    @DisplayName("SAKILA_SALES_BY_STORE_I_02: selectAllWithTakenByManager()")
     @Nested
     class SelectAllWithTakenByManagerTest {
 

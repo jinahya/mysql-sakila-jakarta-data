@@ -57,7 +57,7 @@ public interface ActorRepository
 
     /**
      * Lists the actors whose {@link Actor_#LAST_NAME lastName} is equal to the specified value
-     * ({@code SAKILA-ACTOR-B-01}, the book's pick, which orders by {@link Actor_#ACTOR_ID actorId}).
+     * ({@code SAKILA_ACTOR_B_01}, the book's pick, which orders by {@link Actor_#ACTOR_ID actorId}).
      *
      * @param lastName the last name to match.
      * @return a list of the actors whose last name is {@code lastName}, by their ids.
@@ -68,7 +68,7 @@ public interface ActorRepository
 
     /**
      * Streams the actors whose {@link Actor_#LAST_NAME lastName} starts with the specified prefix
-     * ({@code SAKILA-ACTOR-B-03}, this module's own extra, which orders by
+     * ({@code SAKILA_ACTOR_B_03}, this module's own extra, which orders by
      * {@link Actor_#LAST_NAME lastName}, then by {@link Actor_#ACTOR_ID actorId}).
      * <p>
      * The trailing {@code %} is added in the query, so the caller passes the prefix alone. A
@@ -86,7 +86,7 @@ public interface ActorRepository
 
     /**
      * Selects every actor who appears in a film, with the number of the films
-     * ({@code SAKILA-ACTOR-I-02}, the book's pick, which orders by {@code films} descending, then by
+     * ({@code SAKILA_ACTOR_I_02}, the book's pick, which orders by {@code films} descending, then by
      * {@code actorId}; the exercise's {@code LIMIT 5} is the first page of five).
      * <p>
      * The order is in the query: Hibernate takes an {@link Order} only for a method that returns the
@@ -104,7 +104,7 @@ public interface ActorRepository
     Page<ActorFilmCount> selectFilmCounts(PageRequest pageRequest);
 
     /**
-     * Lists the actors who appear in no film ({@code SAKILA-ACTOR-I-03}, this module's own extra,
+     * Lists the actors who appear in no film ({@code SAKILA_ACTOR_I_03}, this module's own extra,
      * which asks for no order; sort by {@link Actor_#ACTOR_ID actorId} for stable pages).
      *
      * @param pageRequest the page to return.
@@ -118,7 +118,7 @@ public interface ActorRepository
     Page<Actor> listWithoutFilms(PageRequest pageRequest, Order<Actor> order);
 
     /**
-     * Lists the actors who appear in a film of every rating any film has ({@code SAKILA-ACTOR-A-01},
+     * Lists the actors who appear in a film of every rating any film has ({@code SAKILA_ACTOR_A_01},
      * the book's pick, which orders by {@link Actor_#ACTOR_ID actorId}; the exercise's
      * {@code LIMIT 5} is the first page of five).
      *
@@ -135,7 +135,7 @@ public interface ActorRepository
 
     /**
      * Selects the actors whose film counts rank at most the specified rank, ties included
-     * ({@code SAKILA-ACTOR-A-02}, this module's own extra, which ranks densely, the most films
+     * ({@code SAKILA_ACTOR_A_02}, this module's own extra, which ranks densely, the most films
      * first, and orders by {@code filmRank}, then by {@code actorId}; the exercise's rank is
      * {@code 7}).
      * <p>

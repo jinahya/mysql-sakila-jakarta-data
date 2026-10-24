@@ -30,7 +30,7 @@ class ActorRepository_IT
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    @DisplayName("SAKILA-ACTOR-B-01: listByLastName(lastName)")
+    @DisplayName("SAKILA_ACTOR_B_01: listByLastName(lastName)")
     @Nested
     class ListByLastNameTest {
 
@@ -55,7 +55,7 @@ class ActorRepository_IT
         }
     }
 
-    @DisplayName("SAKILA-ACTOR-B-03: streamByLastNameStartingWith(prefix)")
+    @DisplayName("SAKILA_ACTOR_B_03: streamByLastNameStartingWith(prefix)")
     @Nested
     class StreamByLastNameStartingWithTest {
 
@@ -84,7 +84,7 @@ class ActorRepository_IT
         }
     }
 
-    @DisplayName("SAKILA-ACTOR-I-02: selectFilmCounts(pageRequest)")
+    @DisplayName("SAKILA_ACTOR_I_02: selectFilmCounts(pageRequest)")
     @Nested
     class SelectFilmCountsTest {
 
@@ -126,7 +126,7 @@ class ActorRepository_IT
         }
     }
 
-    @DisplayName("SAKILA-ACTOR-I-03: listWithoutFilms(pageRequest, order)")
+    @DisplayName("SAKILA_ACTOR_I_03: listWithoutFilms(pageRequest, order)")
     @Nested
     class ListWithoutFilmsTest {
 
@@ -156,7 +156,7 @@ class ActorRepository_IT
         }
     }
 
-    @DisplayName("SAKILA-ACTOR-A-01: listInFilmsOfEveryRating(pageRequest, order)")
+    @DisplayName("SAKILA_ACTOR_A_01: listInFilmsOfEveryRating(pageRequest, order)")
     @Nested
     class ListInFilmsOfEveryRatingTest {
 
@@ -198,7 +198,7 @@ class ActorRepository_IT
         }
     }
 
-    @DisplayName("SAKILA-ACTOR-A-02: selectFilmCountRanksAtMost(filmRank, pageRequest)")
+    @DisplayName("SAKILA_ACTOR_A_02: selectFilmCountRanksAtMost(filmRank, pageRequest)")
     @Nested
     class SelectFilmCountRanksAtMostTest {
 

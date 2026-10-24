@@ -56,7 +56,7 @@ public interface SalesByStoreRepository {
     }
 
     /**
-     * Selects every row of the view ({@code SAKILA-SALES_BY_STORE-B-01}, native-only, which asks for
+     * Selects every row of the view ({@code SAKILA_SALES_BY_STORE_B_01}, native-only, which asks for
      * no order; the view's own is by country, then by city).
      *
      * @return a list of the rows of the view, one per store.
@@ -67,7 +67,7 @@ public interface SalesByStoreRepository {
     List<StoreSales> selectAll();
 
     /**
-     * Selects how far apart the two stores' sales are ({@code SAKILA-SALES_BY_STORE-B-02},
+     * Selects how far apart the two stores' sales are ({@code SAKILA_SALES_BY_STORE_B_02},
      * native-only, a single value, so no sort).
      *
      * @return the difference between the largest and the smallest {@code total_sales}.
@@ -79,7 +79,7 @@ public interface SalesByStoreRepository {
 
     /**
      * Selects the stores' sales summed, next to every payment with a rental summed
-     * ({@code SAKILA-SALES_BY_STORE-I-01}, native-only, a single row, so no sort).
+     * ({@code SAKILA_SALES_BY_STORE_I_01}, native-only, a single row, so no sort).
      *
      * @return the two sums, which are the same.
      */
@@ -90,7 +90,7 @@ public interface SalesByStoreRepository {
 
     /**
      * Selects each store's sales, next to what its manager took
-     * ({@code SAKILA-SALES_BY_STORE-I-02}, native-only, which orders by {@code store}).
+     * ({@code SAKILA_SALES_BY_STORE_I_02}, native-only, which orders by {@code store}).
      *
      * @return a list of the rows of the view, with the sums their managers took, by store.
      */
