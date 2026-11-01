@@ -37,7 +37,7 @@ explanations and container-free code are preferred.
 
 ## Upstream
 
-The sibling checkout `../mysql-sakila-persistence` publishes, at `0.0.1-SNAPSHOT`, the entity jar and a second jar of
+The upstream checkout `../../mysql-sakila-persistence` publishes, at `0.0.1-SNAPSHOT`, the entity jar and a second jar of
 the same artifact classified `test-companion` (`*_Randomizer` / `*_Persister` classes). Both exist **only in the local
 `~/.m2`**: after any change upstream, run `./mvnw -DskipTests install` there before building here. Its
 `persistence.xml` is test-only, so this project supplies its own.
@@ -48,7 +48,7 @@ the same artifact classified `test-companion` (`*_Randomizer` / `*_Persister` cl
   `7.4.12.Final`, H2, mysql-connector-j, ...) deliberately mirror upstream's, so what compiles here against the
   test-companion jar is what that jar was compiled against, and the generated code runs on the ORM that generated
   upstream's metamodel. Change them in step with upstream, not independently.
-- Upstream's `../mysql-sakila-persistence/EXERCISES.asciidoc` / `EXERCISES.yaml` is the catalogue of query exercises the sibling projects answer
+- Upstream's `../../mysql-sakila-persistence/EXERCISES.asciidoc` / `EXERCISES.yaml` is the catalogue of query exercises the sibling projects answer
   one method per exercise, exercise id named in the method's javadoc.
 
 ## Build
@@ -73,7 +73,7 @@ never runs an IT. As of surefire/failsafe 3.6.0, `-DskipTests` reaches surefire 
 that stops the ITs. Both plugins stop after the first failing class (`skipAfterFailureCount=1`). The enforcer fails
 the build on dependency non-convergence, a JDK below 25, and a `-P` naming a profile that does not exist.
 
-**The integration tests need the Sakila container upstream owns**: run `../mysql-sakila-persistence/_docker_compose_up.sh`
+**The integration tests need the Sakila container upstream owns**: run `../../mysql-sakila-persistence/_docker_compose_up.sh`
 (Ctrl-C takes it down with its data). It runs `mysql:9.7` on `localhost:3306`, database `sakila`, `root` /
 `password`, loaded with the Sakila schema and data. The `sakila-it` unit connects there with `hbm2ddl.auto=none`:
 the sample data is the fixture the ITs read, and nothing may touch the schema or leave rows behind.
