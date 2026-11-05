@@ -75,7 +75,7 @@ the build on dependency non-convergence, a JDK below 25, and a `-P` naming a pro
 
 **The integration tests need the Sakila container upstream owns**: run `../../mysql-sakila-persistence/_docker_compose_up.sh`
 (Ctrl-C takes it down with its data). It runs `mysql:9.7` on `localhost:3306`, database `sakila`, `root` /
-`password`, loaded with the Sakila schema and data. The `sakila-it` unit connects there with `hbm2ddl.auto=none`:
+`Passw0rd!`, loaded with the Sakila schema and data. The `sakila-it` unit connects there with `hbm2ddl.auto=none`:
 the sample data is the fixture the ITs read, and nothing may touch the schema or leave rows behind.
 
 ## Tests

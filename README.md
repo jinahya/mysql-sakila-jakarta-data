@@ -22,7 +22,7 @@ Upstream owns the compose file and the init scripts:
 $ cd ../../mysql-sakila-persistence && ./_docker_compose_up.sh
 ```
 
-brings up `mysql:9.7` on `localhost:3306` as `root` / `password`, loaded with the Sakila schema and data; Ctrl-C takes
+brings up `mysql:9.7` on `localhost:3306` as `root` / `Passw0rd!`, loaded with the Sakila schema and data; Ctrl-C takes
 it down again. The `sakila-it` unit of [`persistence.xml`](src/test/resources/META-INF/persistence.xml) points there.
 
 ## Building

@@ -98,7 +98,7 @@
       <property name="jakarta.persistence.jdbc.url"
                 value="jdbc:mysql://localhost:3306/sakila?characterEncoding=UTF-8"/>
       <property name="jakarta.persistence.jdbc.user" value="root"/>
-      <property name="jakarta.persistence.jdbc.password" value="password"/>
+      <property name="jakarta.persistence.jdbc.password" value="Passw0rd!"/>
       <!-- The sample data is the fixture the tests read; nothing here may touch the schema. -->
       <property name="hibernate.hbm2ddl.auto" value="none"/>
       <property name="hibernate.format_sql" value="true"/>
