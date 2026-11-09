@@ -39,6 +39,7 @@ public interface ActorRepository
      * @param films     the number of films the actor appears in.
      */
     record ActorFilmCount(Integer actorId, String firstName, String lastName, long films) {
+
     }
 
     /**
@@ -53,11 +54,13 @@ public interface ActorRepository
      */
     record ActorFilmCountRank(Integer actorId, String firstName, String lastName, int films,
                               long filmRank) {
+
     }
 
     /**
      * Lists the actors whose {@link Actor_#LAST_NAME lastName} is equal to the specified value
-     * ({@code SAKILA_ACTOR_B_01}, the book's pick, which orders by {@link Actor_#ACTOR_ID actorId}).
+     * ({@code SAKILA_ACTOR_B_01}, the book's pick, which orders by
+     * {@link Actor_#ACTOR_ID actorId}).
      *
      * @param lastName the last name to match.
      * @return a list of the actors whose last name is {@code lastName}, by their ids.
@@ -76,8 +79,8 @@ public interface ActorRepository
      * stream reads the rows as it is consumed; close it.
      *
      * @param prefix the prefix of the last name to match.
-     * @return a stream of the actors whose last name starts with {@code prefix}, by their last names
-     *         and ids.
+     * @return a stream of the actors whose last name starts with {@code prefix}, by their last
+     *         names and ids.
      */
     @Query("""
             where lastName like :prefix || '%'
@@ -86,11 +89,11 @@ public interface ActorRepository
 
     /**
      * Selects every actor who appears in a film, with the number of the films
-     * ({@code SAKILA_ACTOR_I_02}, the book's pick, which orders by {@code films} descending, then by
-     * {@code actorId}; the exercise's {@code LIMIT 5} is the first page of five).
+     * ({@code SAKILA_ACTOR_I_02}, the book's pick, which orders by {@code films} descending, then
+     * by {@code actorId}; the exercise's {@code LIMIT 5} is the first page of five).
      * <p>
-     * The order is in the query: Hibernate takes an {@link Order} only for a method that returns the
-     * entity, and this one returns a {@link ActorFilmCount} per group.
+     * The order is in the query: Hibernate takes an {@link Order} only for a method that returns
+     * the entity, and this one returns a {@link ActorFilmCount} per group.
      *
      * @param pageRequest the page to return.
      * @return a page of the actors with their film counts, the most first.
@@ -118,9 +121,9 @@ public interface ActorRepository
     Page<Actor> listWithoutFilms(PageRequest pageRequest, Order<Actor> order);
 
     /**
-     * Lists the actors who appear in a film of every rating any film has ({@code SAKILA_ACTOR_A_01},
-     * the book's pick, which orders by {@link Actor_#ACTOR_ID actorId}; the exercise's
-     * {@code LIMIT 5} is the first page of five).
+     * Lists the actors who appear in a film of every rating any film has
+     * ({@code SAKILA_ACTOR_A_01}, the book's pick, which orders by {@link Actor_#ACTOR_ID actorId};
+     * the exercise's {@code LIMIT 5} is the first page of five).
      *
      * @param pageRequest the page to return.
      * @param order       the order of the actors.
@@ -139,9 +142,9 @@ public interface ActorRepository
      * first, and orders by {@code filmRank}, then by {@code actorId}; the exercise's rank is
      * {@code 7}).
      * <p>
-     * JPQL has no {@code DENSE_RANK()}; an actor's rank is the number of the distinct film counts at
-     * or above the actor's, each counted once, by the first actor who has it. The order is in the
-     * query, as in {@link #selectFilmCounts(PageRequest)}.
+     * JPQL has no {@code DENSE_RANK()}; an actor's rank is the number of the distinct film counts
+     * at or above the actor's, each counted once, by the first actor who has it. The order is in
+     * the query, as in {@link #selectFilmCounts(PageRequest)}.
      *
      * @param filmRank    the largest rank to select.
      * @param pageRequest the page to return.

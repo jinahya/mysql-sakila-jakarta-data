@@ -34,10 +34,9 @@ abstract class _Repository_Test<R extends _Repository<T, K>, T, K>
      * Produces the factory of the {@code sakila-test} unit, and closes it when the container shuts
      * down.
      * <p>
-     * The scope is {@link Singleton @Singleton}, a pseudo-scope, not
-     * {@code @ApplicationScoped}: a normal scope injects a client proxy, and the generated
-     * repository's {@code unwrap(SessionFactory.class)} on that proxy fails with a
-     * {@link ClassCastException}.
+     * The scope is {@link Singleton @Singleton}, a pseudo-scope, not {@code @ApplicationScoped}: a
+     * normal scope injects a client proxy, and the generated repository's
+     * {@code unwrap(SessionFactory.class)} on that proxy fails with a {@link ClassCastException}.
      */
     static class EntityManagerFactoryProducer {
 

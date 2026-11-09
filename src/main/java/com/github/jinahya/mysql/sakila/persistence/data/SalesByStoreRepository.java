@@ -30,6 +30,7 @@ public interface SalesByStoreRepository {
      * @param totalSales the sum of the payments of the store.
      */
     record StoreSales(String store, String manager, BigDecimal totalSales) {
+
     }
 
     /**
@@ -40,6 +41,7 @@ public interface SalesByStoreRepository {
      * @param withARental the sum of the {@code amount} of the payments which have a rental.
      */
     record SalesSums(BigDecimal byStore, BigDecimal withARental) {
+
     }
 
     /**
@@ -53,11 +55,12 @@ public interface SalesByStoreRepository {
      */
     record StoreSalesTakenByManager(String store, String manager, BigDecimal totalSales,
                                     BigDecimal takenByManager) {
+
     }
 
     /**
-     * Selects every row of the view ({@code SAKILA_SALES_BY_STORE_B_01}, native-only, which asks for
-     * no order; the view's own is by country, then by city).
+     * Selects every row of the view ({@code SAKILA_SALES_BY_STORE_B_01}, native-only, which asks
+     * for no order; the view's own is by country, then by city).
      *
      * @return a list of the rows of the view, one per store.
      */

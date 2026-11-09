@@ -36,7 +36,8 @@ class SalesByStoreRepository_IT
                                 SalesByStoreRepository.StoreSales::manager,
                                 SalesByStoreRepository.StoreSales::totalSales)
                     .containsExactlyInAnyOrder(
-                            tuple("Woodridge,Australia", "Jon Stephens", new BigDecimal("33726.77")),
+                            tuple("Woodridge,Australia", "Jon Stephens",
+                                  new BigDecimal("33726.77")),
                             tuple("Lethbridge,Canada", "Mike Hillyer", new BigDecimal("33679.79")));
         }
     }

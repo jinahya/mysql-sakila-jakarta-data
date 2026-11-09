@@ -15,8 +15,8 @@ import java.util.Objects;
  * {@link __Repository_TestBase}; this base does the same for it otherwise: a Weld SE container per
  * test method, the factory of {@link _Repository_IT.EntityManagerFactoryProducer}, and the
  * generated {@code <Repository>_} class, which the concrete test adds, selected from an
- * {@link Instance}. The views do not exist on {@code sakila-test}, whose schema Hibernate
- * generates from the entities, so there is no unit-test counterpart.
+ * {@link Instance}. The views do not exist on {@code sakila-test}, whose schema Hibernate generates
+ * from the entities, so there is no unit-test counterpart.
  *
  * @param <R> the type of the repository under test.
  */

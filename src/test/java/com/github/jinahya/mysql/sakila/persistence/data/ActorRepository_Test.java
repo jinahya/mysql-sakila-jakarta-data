@@ -61,7 +61,8 @@ class ActorRepository_Test
                     persistActor(em, "SEAN", "GUINESS").getActorId()
             });
             final var list = getRepositoryInstance().listByLastName("GUINESS");
-            assertThat(list).extracting(Actor::getActorId).containsExactlyInAnyOrder(ids[0], ids[2]);
+            assertThat(list).extracting(Actor::getActorId)
+                    .containsExactlyInAnyOrder(ids[0], ids[2]);
         }
 
         @Test

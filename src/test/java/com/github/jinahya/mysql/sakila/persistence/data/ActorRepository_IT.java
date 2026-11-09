@@ -113,7 +113,8 @@ class ActorRepository_IT
 
         @Test
         void __paged() {
-            final var page = getRepositoryInstance().selectFilmCounts(PageRequest.ofPage(2, 5, true));
+            final var page =
+                    getRepositoryInstance().selectFilmCounts(PageRequest.ofPage(2, 5, true));
             assertThat(page.content()).hasSize(5).extracting(ActorRepository.ActorFilmCount::films)
                     .allMatch(f -> f <= 37L);
             assertThat(page.totalElements()).isEqualTo(200L);
